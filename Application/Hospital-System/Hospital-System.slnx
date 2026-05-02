@@ -1,9 +1,11 @@
 <Solution>
+  <Folder Name="/Application/">
+    <Project Path="HospitalSystemApp/HospitalSystemApp.csproj" />
+  </Folder>
   <Folder Name="/Database/">
     <File Path="../../Database/HospitalSystem.sql" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
-  <Project Path="HospitalSystemApp/HospitalSystemApp.csproj" />
 </Solution>

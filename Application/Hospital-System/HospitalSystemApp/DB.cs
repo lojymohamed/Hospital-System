@@ -1,5 +1,11 @@
-﻿public static class DB
+﻿using System.Data.SqlClient;
+
+public class DB
 {
-    public static string conStr =
-    @"Server=.;Database=HospitalSystem;Trusted_Connection=True;";
+    public static SqlConnection GetConnection()
+    {
+        return new SqlConnection(
+            "Server=.;Database=HospitalSystem;Trusted_Connection=True;"
+        );
+    }
 }
