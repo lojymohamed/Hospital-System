@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/Database/">
+    <File Path="../../Database/HospitalSystem.sql" />
+  </Folder>
+  <Project Path="HospitalSystemApp/HospitalSystemApp.csproj" />
+</Solution>
