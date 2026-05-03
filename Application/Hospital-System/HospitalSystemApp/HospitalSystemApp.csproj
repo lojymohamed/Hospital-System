@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,11 +47,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="DoctorMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="DoctorMainForm.Designer.cs">
+      <DependentUpon>DoctorMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientEntryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientEntryForm.Designer.cs">
+      <DependentUpon>PatientEntryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientMainForm.Designer.cs">
+      <DependentUpon>PatientMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
@@ -58,8 +77,10 @@
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PersonPhone.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Repos\PersonRepository.cs" />
+    <Compile Include="Repos\AuthRepository.cs" />
+    <Compile Include="Repos\PatientRepository.cs" />
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -70,8 +91,14 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="PatientEntryForm.resx">
+      <DependentUpon>PatientEntryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientMainForm.resx">
+      <DependentUpon>PatientMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
