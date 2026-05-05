@@ -20,12 +20,25 @@ namespace HospitalSystemApp
         {
             InitializeComponent();
             _patientID = patientID;
+            this.Opacity = 0;
         }
 
         private void PatientEntryForm_Load(object sender, EventArgs e)
         {
             FillDoctorComboBox();
             FillServiceTypeComboBox();
+            dtpDate.Value = DateTime.Today;
+
+            FadeIn();
+        }
+        private async void FadeIn()
+        {
+            for (double i = 0; i <= 1.0; i += 0.05)
+            {
+                this.Opacity = i;
+                await System.Threading.Tasks.Task.Delay(15);
+            }
+            this.Opacity = 1;
         }
 
         private void FillDoctorComboBox()
@@ -41,25 +54,70 @@ namespace HospitalSystemApp
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
+                // Add a placeholder row at the top
+                DataRow placeholder = dt.NewRow();
+                placeholder["PersonID"] = DBNull.Value;
+                placeholder["Name"] = "-- Select a Doctor --";
+                dt.Rows.InsertAt(placeholder, 0);
+
                 cmbDoctor.DataSource = dt;
-                cmbDoctor.DisplayMember = "Name";    // The doctor's name the patient sees
-                cmbDoctor.ValueMember = "PersonID";   // The ID used for the database link
+                cmbDoctor.DisplayMember = "Name";
+                cmbDoctor.ValueMember = "PersonID";
+                cmbDoctor.SelectedIndex = 0; // Show placeholder first
             }
         }
 
         private void FillServiceTypeComboBox()
         {
-            // You can either pull these from a table or add them manually
+            cmbServiceType.Items.Clear();
+            cmbServiceType.Items.Add("-- Select Service Type --");
             cmbServiceType.Items.Add("General Checkup");
             cmbServiceType.Items.Add("Surgery");
             cmbServiceType.Items.Add("Radiology");
             cmbServiceType.Items.Add("Emergency");
-            cmbServiceType.SelectedIndex = 0; // Select the first one by default
+            cmbServiceType.SelectedIndex = 0;
         }
+
+        private bool ValidateInputs()
+        {
+            // Doctor must be selected (not placeholder)
+            if (cmbDoctor.SelectedIndex == 0 || cmbDoctor.SelectedValue == DBNull.Value)
+            {
+                MessageBox.Show("Please select a doctor.", "Validation",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbDoctor.Focus();
+                return false;
+            }
+
+            // Service type must be selected (not placeholder)
+            if (cmbServiceType.SelectedIndex == 0)
+            {
+                MessageBox.Show("Please select a service type.", "Validation",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbServiceType.Focus();
+                return false;
+            }
+
+            // Date cannot be in the past
+            if (dtpDate.Value.Date < DateTime.Today)
+            {
+                MessageBox.Show("Service date cannot be in the past.", "Validation",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpDate.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
 
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+
+            if (!ValidateInputs()) return;
+            btnSubmit.Enabled = false;
+            btnSubmit.Text = "Submitting...";
             using (SqlConnection conn = DB.GetConnection())
             {
                 conn.Open();
@@ -75,35 +133,44 @@ namespace HospitalSystemApp
                     cmd1.Parameters.AddWithValue("@pid", _patientID);
                     int newServiceID = Convert.ToInt32(cmd1.ExecuteScalar());
 
-                    // STEP 2: Insert into DoctorServices (The "Type")
-                    string sqlDocService = "INSERT INTO DoctorServices (ServiceID, ServiceType) VALUES (@sid, @stype); SELECT SCOPE_IDENTITY();";
-                    SqlCommand cmd2 = new SqlCommand(sqlDocService, conn, trans);
-                    cmd2.Parameters.AddWithValue("@sid", newServiceID);
-                    cmd2.Parameters.AddWithValue("@stype", cmbServiceType.Text);
-                    int newDS_ID = Convert.ToInt32(cmd2.ExecuteScalar());
-
-                    // STEP 3: Insert into DoctorHisServices (The "Doctor")
-                    string sqlHis = "INSERT INTO DoctorHisServices (DS_ID, DoctorID) VALUES (@dsid, @did)";
-                    SqlCommand cmd3 = new SqlCommand(sqlHis, conn, trans);
-                    cmd3.Parameters.AddWithValue("@dsid", newDS_ID);
-                    cmd3.Parameters.AddWithValue("@did", cmbDoctor.SelectedValue);
-                    cmd3.ExecuteNonQuery();
 
                     trans.Commit(); // All 3 succeed together
-                    MessageBox.Show("Service and Doctor assigned successfully!");
+                   
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 catch (Exception ex)
                 {
-                    trans.Rollback(); // If one fails, undo everything
-                    MessageBox.Show("Error: " + ex.Message);
+                    trans.Rollback();
+                    MessageBox.Show("Failed to submit: " + ex.Message, "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    // Re-enable so user can try again
+                    btnSubmit.Enabled = true;
+                    btnSubmit.Text = "Submit";
                 }
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            // Only ask if they've typed something
+            bool hasInput = !string.IsNullOrWhiteSpace(txtNote.Text)
+                         || cmbDoctor.SelectedIndex > 0
+                         || cmbServiceType.SelectedIndex > 0;
+
+            if (hasInput)
+            {
+                var confirm = MessageBox.Show(
+                    "Are you sure you want to cancel? Your changes will be lost.",
+                    "Cancel",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirm != DialogResult.Yes) return;
+            }
+
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 

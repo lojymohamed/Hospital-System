@@ -14,11 +14,13 @@ public class AuthRepository
                        CASE 
                            WHEN D.DoctorID IS NOT NULL THEN 'Doctor'
                            WHEN PA.PatientID IS NOT NULL THEN 'Patient'
+                           WHEN N.NurseID IS NOT NULL THEN 'Nurse'
                            ELSE 'Unknown'
                        END AS UserRole
                 FROM Person P
                 LEFT JOIN Doctor D ON P.PersonID = D.DoctorID
                 LEFT JOIN Patient PA ON P.PersonID = PA.PatientID
+                LEFT JOIN NURSE N ON P.PersonID = N.NurseID
                 WHERE P.Email = @email AND P.BirthDate = @dob";
 
             SqlCommand cmd = new SqlCommand(query, conn);

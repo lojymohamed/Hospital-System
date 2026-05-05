@@ -70,9 +70,9 @@
             // 
             // dtpDate
             // 
-            this.dtpDate.Location = new System.Drawing.Point(163, 224);
+            this.dtpDate.Location = new System.Drawing.Point(154, 224);
             this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(224, 22);
+            this.dtpDate.Size = new System.Drawing.Size(253, 22);
             this.dtpDate.TabIndex = 49;
             // 
             // label11
@@ -86,10 +86,10 @@
             // 
             // txtNote
             // 
-            this.txtNote.Location = new System.Drawing.Point(163, 275);
+            this.txtNote.Location = new System.Drawing.Point(154, 275);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(224, 22);
+            this.txtNote.Size = new System.Drawing.Size(253, 22);
             this.txtNote.TabIndex = 51;
             // 
             // btnCancel
@@ -155,7 +155,7 @@
             this.cmbServiceType.FormattingEnabled = true;
             this.cmbServiceType.Location = new System.Drawing.Point(154, 117);
             this.cmbServiceType.Name = "cmbServiceType";
-            this.cmbServiceType.Size = new System.Drawing.Size(233, 24);
+            this.cmbServiceType.Size = new System.Drawing.Size(262, 24);
             this.cmbServiceType.TabIndex = 60;
             // 
             // cmbDoctor
@@ -163,7 +163,7 @@
             this.cmbDoctor.FormattingEnabled = true;
             this.cmbDoctor.Location = new System.Drawing.Point(154, 166);
             this.cmbDoctor.Name = "cmbDoctor";
-            this.cmbDoctor.Size = new System.Drawing.Size(233, 24);
+            this.cmbDoctor.Size = new System.Drawing.Size(262, 24);
             this.cmbDoctor.TabIndex = 61;
             // 
             // PatientEntryForm

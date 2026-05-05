@@ -1,7 +1,7 @@
 USE HospitalSystem;
 GO
 
--- 1. CLEANUP: Kill all existing constraints and tables
+-- CLEANUP: Kill all existing constraints and tables
 
 DECLARE @sql NVARCHAR(MAX) = N'';
 SELECT @sql += 'ALTER TABLE ' + QUOTENAME(OBJECT_SCHEMA_NAME(parent_object_id))
@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS Person;
 GO
 
 
--- 2. CREATE TABLES (With Automatic IDs)
+--  CREATE TABLES
 
 CREATE TABLE Person (
     PersonID INT PRIMARY KEY IDENTITY(1,1), 
@@ -89,6 +89,7 @@ CREATE TABLE Services (
     ServiceDate DATE,
     Notes VARCHAR(255),
     PatientID INT,
+    [Status] VARCHAR(20) DEFAULT 'Requested',
     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE
 );
 
@@ -158,7 +159,10 @@ INSERT INTO Nurse VALUES (7, 'Morning', 8000, 1),(8, 'Night', 8500, 2),(9, 'Morn
 
 INSERT INTO Insurance (PatientID, CompanyName, CompanyType) VALUES (1, 'AXA', 'Private'),(2, 'Misr Insurance', 'Government'),(3, 'Allianz', 'Private');
 
-INSERT INTO Services (ServiceDate, Notes, PatientID) VALUES ('2026-04-01', 'Checkup', 1),('2026-04-02', 'MRI Scan', 2),('2026-04-03', 'Emergency Case', 3);
+INSERT INTO Services (ServiceDate, Notes, PatientID, [Status]) VALUES 
+('2026-04-01', 'Checkup', 1, 'Completed'),
+('2026-04-02', 'MRI Scan', 2, 'Completed'),
+('2026-04-03', 'Emergency Case', 3, 'Completed');
 
 INSERT INTO DoctorServices (ServiceID, ServiceType) VALUES (1, 'Consultation'),(2, 'Radiology'),(3, 'Surgery');
 INSERT INTO DoctorHisServices (DS_ID, DoctorID) VALUES (1, 4),(2, 5),(3, 6);

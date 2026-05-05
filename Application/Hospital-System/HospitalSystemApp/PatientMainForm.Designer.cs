@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.directorySearcher1 = new System.DirectoryServices.DirectorySearcher();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
@@ -40,6 +40,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblEmptyState = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnLogout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvServices)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -54,18 +55,20 @@
             // lblWelcome
             // 
             this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Location = new System.Drawing.Point(25, 13);
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(8, 0);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(44, 16);
+            this.lblWelcome.Size = new System.Drawing.Size(92, 32);
             this.lblWelcome.TabIndex = 0;
             this.lblWelcome.Text = "label1";
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(106, 13);
+            this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.Location = new System.Drawing.Point(146, 0);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(44, 16);
+            this.lblEmail.Size = new System.Drawing.Size(92, 32);
             this.lblEmail.TabIndex = 1;
             this.lblEmail.Text = "label1";
             // 
@@ -73,21 +76,22 @@
             // 
             this.dgvServices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvServices.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvServices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvServices.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvServices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvServices.Location = new System.Drawing.Point(50, 129);
             this.dgvServices.Name = "dgvServices";
             this.dgvServices.RowHeadersWidth = 51;
             this.dgvServices.RowTemplate.Height = 24;
-            this.dgvServices.Size = new System.Drawing.Size(338, 173);
+            this.dgvServices.Size = new System.Drawing.Size(672, 173);
             this.dgvServices.TabIndex = 4;
+            this.dgvServices.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvServices_CellContentClick);
             // 
             // lblInsCompany
             // 
@@ -109,21 +113,24 @@
             // 
             // btnRequestService
             // 
-            this.btnRequestService.Location = new System.Drawing.Point(313, 351);
+            this.btnRequestService.BackColor = System.Drawing.Color.Khaki;
+            this.btnRequestService.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.btnRequestService.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnRequestService.Location = new System.Drawing.Point(590, 339);
             this.btnRequestService.Name = "btnRequestService";
-            this.btnRequestService.Size = new System.Drawing.Size(75, 23);
+            this.btnRequestService.Size = new System.Drawing.Size(132, 59);
             this.btnRequestService.TabIndex = 7;
-            this.btnRequestService.Text = "Service";
-            this.btnRequestService.UseVisualStyleBackColor = true;
+            this.btnRequestService.Text = "Request a Service";
+            this.btnRequestService.UseVisualStyleBackColor = false;
             this.btnRequestService.Click += new System.EventHandler(this.btnRequestService_Click);
             // 
             // btnShowDoctors
             // 
-            this.btnShowDoctors.Location = new System.Drawing.Point(313, 405);
+            this.btnShowDoctors.Location = new System.Drawing.Point(607, 308);
             this.btnShowDoctors.Name = "btnShowDoctors";
-            this.btnShowDoctors.Size = new System.Drawing.Size(75, 23);
+            this.btnShowDoctors.Size = new System.Drawing.Size(115, 23);
             this.btnShowDoctors.TabIndex = 8;
-            this.btnShowDoctors.Text = "Doctors";
+            this.btnShowDoctors.Text = "Show Doctors";
             this.btnShowDoctors.UseVisualStyleBackColor = true;
             this.btnShowDoctors.Click += new System.EventHandler(this.btnShowDoctors_Click);
             // 
@@ -131,9 +138,9 @@
             // 
             this.groupBox1.Controls.Add(this.lblInsCompany);
             this.groupBox1.Controls.Add(this.lblInsType);
-            this.groupBox1.Location = new System.Drawing.Point(50, 339);
+            this.groupBox1.Location = new System.Drawing.Point(50, 328);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1.Size = new System.Drawing.Size(200, 114);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Insurance Info:";
@@ -143,7 +150,7 @@
             this.lblEmptyState.AutoSize = true;
             this.lblEmptyState.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmptyState.ForeColor = System.Drawing.Color.IndianRed;
-            this.lblEmptyState.Location = new System.Drawing.Point(73, 200);
+            this.lblEmptyState.Location = new System.Drawing.Point(215, 207);
             this.lblEmptyState.Name = "lblEmptyState";
             this.lblEmptyState.Size = new System.Drawing.Size(302, 29);
             this.lblEmptyState.TabIndex = 10;
@@ -161,12 +168,24 @@
             this.panel1.Size = new System.Drawing.Size(338, 46);
             this.panel1.TabIndex = 12;
             // 
+            // btnLogout
+            // 
+            this.btnLogout.BackColor = System.Drawing.Color.Salmon;
+            this.btnLogout.Location = new System.Drawing.Point(647, 405);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(75, 37);
+            this.btnLogout.TabIndex = 13;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // PatientMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(471, 513);
+            this.ClientSize = new System.Drawing.Size(864, 513);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblEmptyState);
             this.Controls.Add(this.groupBox1);
@@ -199,5 +218,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblEmptyState;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnLogout;
     }
 }
