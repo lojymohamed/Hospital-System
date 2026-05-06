@@ -33,16 +33,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtFName = new System.Windows.Forms.TextBox();
-            this.txtCoverage = new System.Windows.Forms.TextBox();
-            this.txtCompany = new System.Windows.Forms.TextBox();
-            this.txtPhone = new System.Windows.Forms.TextBox();
-            this.txtBirth = new System.Windows.Forms.TextBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtLName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,8 +41,19 @@
             this.Lable3 = new System.Windows.Forms.Label();
             this.Lable2 = new System.Windows.Forms.Label();
             this.Lable1 = new System.Windows.Forms.Label();
+            this.txtLName = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.txtCompany = new System.Windows.Forms.TextBox();
+            this.txtCoverage = new System.Windows.Forms.TextBox();
+            this.txtFName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtBirth = new System.Windows.Forms.DateTimePicker();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPatients)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvPatients
@@ -59,60 +61,62 @@
             this.dgvPatients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPatients.Location = new System.Drawing.Point(35, 116);
             this.dgvPatients.Name = "dgvPatients";
+            this.dgvPatients.ReadOnly = true;
             this.dgvPatients.RowHeadersWidth = 62;
             this.dgvPatients.RowTemplate.Height = 28;
+            this.dgvPatients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPatients.Size = new System.Drawing.Size(998, 369);
             this.dgvPatients.TabIndex = 13;
+            this.dgvPatients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPatients_CellClick);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(68, 946);
+            this.btnAdd.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnAdd.Location = new System.Drawing.Point(68, 917);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(110, 34);
+            this.btnAdd.Size = new System.Drawing.Size(136, 49);
             this.btnAdd.TabIndex = 14;
             this.btnAdd.Text = "Add Patient";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(210, 946);
+            this.btnDelete.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnDelete.Location = new System.Drawing.Point(206, 28);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(129, 34);
+            this.btnDelete.Size = new System.Drawing.Size(136, 49);
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Delete Patient";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(362, 946);
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnUpdate.Location = new System.Drawing.Point(386, 28);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(138, 34);
+            this.btnUpdate.Size = new System.Drawing.Size(136, 49);
             this.btnUpdate.TabIndex = 16;
             this.btnUpdate.Text = "Update Patient";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(533, 946);
+            this.btnClear.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnClear.Location = new System.Drawing.Point(567, 28);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(89, 34);
+            this.btnClear.Size = new System.Drawing.Size(97, 49);
             this.btnClear.TabIndex = 17;
             this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(667, 946);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(78, 34);
-            this.btnClose.TabIndex = 18;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.button5_Click);
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.groupBox1.Controls.Add(this.txtBirth);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label5);
@@ -122,7 +126,6 @@
             this.groupBox1.Controls.Add(this.Lable1);
             this.groupBox1.Controls.Add(this.txtLName);
             this.groupBox1.Controls.Add(this.txtEmail);
-            this.groupBox1.Controls.Add(this.txtBirth);
             this.groupBox1.Controls.Add(this.txtPhone);
             this.groupBox1.Controls.Add(this.txtCompany);
             this.groupBox1.Controls.Add(this.txtCoverage);
@@ -132,67 +135,6 @@
             this.groupBox1.Size = new System.Drawing.Size(998, 342);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
-            // 
-            // txtFName
-            // 
-            this.txtFName.Location = new System.Drawing.Point(175, 63);
-            this.txtFName.Name = "txtFName";
-            this.txtFName.Size = new System.Drawing.Size(236, 26);
-            this.txtFName.TabIndex = 0;
-            // 
-            // txtCoverage
-            // 
-            this.txtCoverage.Location = new System.Drawing.Point(656, 189);
-            this.txtCoverage.Name = "txtCoverage";
-            this.txtCoverage.Size = new System.Drawing.Size(236, 26);
-            this.txtCoverage.TabIndex = 1;
-            // 
-            // txtCompany
-            // 
-            this.txtCompany.Location = new System.Drawing.Point(656, 127);
-            this.txtCompany.Name = "txtCompany";
-            this.txtCompany.Size = new System.Drawing.Size(236, 26);
-            this.txtCompany.TabIndex = 2;
-            // 
-            // txtPhone
-            // 
-            this.txtPhone.Location = new System.Drawing.Point(656, 63);
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(236, 26);
-            this.txtPhone.TabIndex = 3;
-            // 
-            // txtBirth
-            // 
-            this.txtBirth.Location = new System.Drawing.Point(175, 266);
-            this.txtBirth.Name = "txtBirth";
-            this.txtBirth.Size = new System.Drawing.Size(236, 26);
-            this.txtBirth.TabIndex = 4;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(175, 198);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(236, 26);
-            this.txtEmail.TabIndex = 5;
-            // 
-            // txtLName
-            // 
-            this.txtLName.Location = new System.Drawing.Point(175, 127);
-            this.txtLName.Name = "txtLName";
-            this.txtLName.Size = new System.Drawing.Size(236, 26);
-            this.txtLName.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
-            this.label1.Location = new System.Drawing.Point(38, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(386, 46);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Patient Management";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -258,24 +200,108 @@
             this.Lable1.TabIndex = 27;
             this.Lable1.Text = "First Name:";
             // 
+            // txtLName
+            // 
+            this.txtLName.Location = new System.Drawing.Point(175, 127);
+            this.txtLName.Name = "txtLName";
+            this.txtLName.Size = new System.Drawing.Size(236, 26);
+            this.txtLName.TabIndex = 6;
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(175, 198);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(236, 26);
+            this.txtEmail.TabIndex = 5;
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(656, 63);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(236, 26);
+            this.txtPhone.TabIndex = 3;
+            // 
+            // txtCompany
+            // 
+            this.txtCompany.Location = new System.Drawing.Point(656, 127);
+            this.txtCompany.Name = "txtCompany";
+            this.txtCompany.Size = new System.Drawing.Size(236, 26);
+            this.txtCompany.TabIndex = 2;
+            // 
+            // txtCoverage
+            // 
+            this.txtCoverage.Location = new System.Drawing.Point(656, 189);
+            this.txtCoverage.Name = "txtCoverage";
+            this.txtCoverage.Size = new System.Drawing.Size(236, 26);
+            this.txtCoverage.TabIndex = 1;
+            // 
+            // txtFName
+            // 
+            this.txtFName.Location = new System.Drawing.Point(175, 63);
+            this.txtFName.Name = "txtFName";
+            this.txtFName.Size = new System.Drawing.Size(236, 26);
+            this.txtFName.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.label1.Location = new System.Drawing.Point(38, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(386, 46);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Patient Management";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnClose);
+            this.groupBox2.Controls.Add(this.btnClear);
+            this.groupBox2.Controls.Add(this.btnUpdate);
+            this.groupBox2.Controls.Add(this.btnDelete);
+            this.groupBox2.Location = new System.Drawing.Point(46, 889);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(837, 130);
+            this.groupBox2.TabIndex = 21;
+            this.groupBox2.TabStop = false;
+            // 
+            // txtBirth
+            // 
+            this.txtBirth.Location = new System.Drawing.Point(175, 266);
+            this.txtBirth.Name = "txtBirth";
+            this.txtBirth.Size = new System.Drawing.Size(319, 26);
+            this.txtBirth.TabIndex = 22;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnClose.Location = new System.Drawing.Point(711, 28);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(96, 49);
+            this.btnClose.TabIndex = 18;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // ManagePatientsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 1015);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1135, 1128);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dgvPatients);
+            this.Controls.Add(this.groupBox2);
             this.Name = "ManagePatientsForm";
             this.Text = "ManagePatientsForm";
+            this.Load += new System.EventHandler(this.ManagePatientsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPatients)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,7 +314,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -299,11 +324,13 @@
         private System.Windows.Forms.Label Lable1;
         private System.Windows.Forms.TextBox txtLName;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtBirth;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtCompany;
         private System.Windows.Forms.TextBox txtCoverage;
         private System.Windows.Forms.TextBox txtFName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DateTimePicker txtBirth;
+        private System.Windows.Forms.Button btnClose;
     }
 }

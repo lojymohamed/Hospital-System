@@ -12,7 +12,7 @@ using HospitalSystemApp.Models;
 
 namespace HospitalSystemApp
 {
-    public partial class DoctorMainForm : Form
+   public partial class DoctorMainForm : Form
     {
         private User _user;
 
@@ -63,7 +63,7 @@ namespace HospitalSystemApp
             LoadNurseServices();
             LoadServices();
             dgvRequests.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvRequests.MultiSelect = true;
+            dgvRequests.MultiSelect = false;
             dgvRequests.ReadOnly = true;
         }
 
@@ -117,11 +117,13 @@ namespace HospitalSystemApp
 
             if (confirm == DialogResult.Yes)
             {
-                ManagePatientsForm form = new ManagePatientsForm();
-                form.Show();
-                this.Close();
-            }
+                this.Hide();
 
+                ManagePatientsForm form = new ManagePatientsForm(_user);
+                form.ShowDialog();
+
+                this.Show();
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
