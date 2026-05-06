@@ -14,9 +14,12 @@ namespace HospitalSystemApp
 {
     public partial class DoctorMainForm : Form
     {
-        public DoctorMainForm()
+        private User _user;
+
+        public DoctorMainForm(User user)
         {
             InitializeComponent();
+            _user = user;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
