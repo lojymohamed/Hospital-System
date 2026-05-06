@@ -53,8 +53,8 @@ namespace HospitalSystemApp
             {
                 if (currentUser.Role == "Doctor")
                 {
-//DoctorMainForm docForm = new DoctorMainForm(currentUser);
-  //                  docForm.Show();
+                    //DoctorMainForm docForm = new DoctorMainForm(currentUser);
+                    //docForm.Show();
                 }
                 else if (currentUser.Role == "Patient")
                 {

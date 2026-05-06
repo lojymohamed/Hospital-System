@@ -53,6 +53,18 @@
     <Compile Include="DoctorListForm.Designer.cs">
       <DependentUpon>DoctorListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DoctorMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoctorMainForm.Designer.cs">
+      <DependentUpon>DoctorMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePatientsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagePatientsForm.Designer.cs">
+      <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="NurseMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +107,9 @@
   <ItemGroup>
     <EmbeddedResource Include="DoctorListForm.resx">
       <DependentUpon>DoctorListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoctorMainForm.resx">
+      <DependentUpon>DoctorMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NurseMainForm.resx">
       <DependentUpon>NurseMainForm.cs</DependentUpon>

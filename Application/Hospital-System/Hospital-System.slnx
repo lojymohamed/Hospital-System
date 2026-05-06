@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/Application/">
-    <Project Path="HospitalSystemApp/HospitalSystemApp.csproj" />
+    <Project Path="HospitalSystemApp/HospitalSystemApp.csproj" Id="b93c9f9e-c6ed-41e2-8928-584ac167b4cf" />
   </Folder>
   <Folder Name="/Database/">
     <File Path="../../Database/HospitalSystem.sql" />
