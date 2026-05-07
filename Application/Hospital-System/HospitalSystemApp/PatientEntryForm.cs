@@ -82,13 +82,21 @@ namespace HospitalSystemApp
 
         private void FillServiceTypeComboBox()
         {
-            cmbServiceType.Items.Clear();
-            cmbServiceType.Items.Add("-- Select Service Type --");
-            cmbServiceType.Items.Add("General Checkup");
-            cmbServiceType.Items.Add("Surgery");
-            cmbServiceType.Items.Add("Radiology");
-            cmbServiceType.Items.Add("Emergency");
-            cmbServiceType.SelectedIndex = 0;
+            using (SqlConnection conn = DB.GetConnection())
+            {
+                string sql = "SELECT DISTINCT ServiceType FROM DoctorServices WHERE ServiceType IS NOT NULL";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                cmbServiceType.Items.Clear();
+                cmbServiceType.Items.Add("-- Select Service Type --");
+
+                while (reader.Read())
+                    cmbServiceType.Items.Add(reader["ServiceType"].ToString());
+
+                cmbServiceType.SelectedIndex = 0;
+            }
         }
 
         private bool ValidateInputs()
@@ -127,31 +135,46 @@ namespace HospitalSystemApp
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-
             if (!ValidateInputs()) return;
             btnSubmit.Enabled = false;
             btnSubmit.Text = "Submitting...";
+
             using (SqlConnection conn = DB.GetConnection())
             {
                 conn.Open();
-                SqlTransaction trans = conn.BeginTransaction(); // Keeps data safe across 3 tables
+                SqlTransaction trans = conn.BeginTransaction();
 
                 try
                 {
                     // STEP 1: Insert into Services
-                    string sqlService = "INSERT INTO Services (ServiceDate, Notes, PatientID) VALUES (@date, @notes, @pid); SELECT SCOPE_IDENTITY();";
+                    string sqlService = @"INSERT INTO Services (ServiceDate, Notes, PatientID) 
+                                  VALUES (@date, @notes, @pid); 
+                                  SELECT SCOPE_IDENTITY();";
                     SqlCommand cmd1 = new SqlCommand(sqlService, conn, trans);
-                    SqlParameter paramDate = new SqlParameter("@date", dtpDate.Value);
-                    cmd1.Parameters.Add(paramDate);
-                    SqlParameter paramNotes = new SqlParameter("@notes", txtNote.Text);
-                    cmd1.Parameters.Add(paramNotes);
-                    SqlParameter paramPid = new SqlParameter("@pid", _patientID);
-                    cmd1.Parameters.Add(paramPid);
+                    cmd1.Parameters.AddWithValue("@date", dtpDate.Value.Date);
+                    cmd1.Parameters.AddWithValue("@notes", txtNote.Text);
+                    cmd1.Parameters.AddWithValue("@pid", _patientID);
                     int newServiceID = Convert.ToInt32(cmd1.ExecuteScalar());
 
+                    // STEP 2: Insert into DoctorServices
+                    string sqlDS = @"INSERT INTO DoctorServices (ServiceID, ServiceType) 
+                             VALUES (@sid, @stype); 
+                             SELECT SCOPE_IDENTITY();";
+                    SqlCommand cmd2 = new SqlCommand(sqlDS, conn, trans);
+                    cmd2.Parameters.AddWithValue("@sid", newServiceID);
+                    cmd2.Parameters.AddWithValue("@stype", cmbServiceType.SelectedItem.ToString());
+                    int newDsID = Convert.ToInt32(cmd2.ExecuteScalar());
+
+                    // STEP 3: Insert into DoctorHisServices
+                    string sqlDHS = @"INSERT INTO DoctorHisServices (DS_ID, DoctorID) 
+                              VALUES (@dsid, @did)";
+                    SqlCommand cmd3 = new SqlCommand(sqlDHS, conn, trans);
+                    cmd3.Parameters.AddWithValue("@dsid", newDsID);
+                    cmd3.Parameters.AddWithValue("@did", Convert.ToInt32(cmbDoctor.SelectedValue));
+                    cmd3.ExecuteNonQuery();
 
                     trans.Commit(); // All 3 succeed together
-                   
+
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -160,8 +183,6 @@ namespace HospitalSystemApp
                     trans.Rollback();
                     MessageBox.Show("Failed to submit: " + ex.Message, "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    // Re-enable so user can try again
                     btnSubmit.Enabled = true;
                     btnSubmit.Text = "Submit";
                 }
