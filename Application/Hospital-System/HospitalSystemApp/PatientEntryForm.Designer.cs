@@ -99,7 +99,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(289, 389);
+            this.btnCancel.Location = new System.Drawing.Point(309, 367);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(98, 33);
             this.btnCancel.TabIndex = 52;
@@ -114,7 +114,7 @@
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.ForeColor = System.Drawing.Color.White;
-            this.btnSubmit.Location = new System.Drawing.Point(154, 389);
+            this.btnSubmit.Location = new System.Drawing.Point(178, 367);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(98, 33);
             this.btnSubmit.TabIndex = 53;
@@ -146,9 +146,9 @@
             this.label14.AutoSize = true;
             this.label14.Location = new System.Drawing.Point(33, 174);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(47, 16);
+            this.label14.Size = new System.Drawing.Size(106, 16);
             this.label14.TabIndex = 56;
-            this.label14.Text = "Doctor";
+            this.label14.Text = "Preferred Doctor";
             // 
             // cmbServiceType
             // 
@@ -170,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 560);
+            this.ClientSize = new System.Drawing.Size(494, 482);
             this.Controls.Add(this.cmbDoctor);
             this.Controls.Add(this.cmbServiceType);
             this.Controls.Add(this.label13);
