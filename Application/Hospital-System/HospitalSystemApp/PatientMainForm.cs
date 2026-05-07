@@ -58,7 +58,8 @@ namespace HospitalSystemApp
             {
                 string sql = "SELECT CompanyName, CompanyType FROM Insurance WHERE PatientID = @id";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@id", _user.PersonID);
+                SqlParameter paramId = new SqlParameter("@id", _user.PersonID);
+                cmd.Parameters.Add(paramId);
 
                 conn.Open();
                 SqlDataReader r = cmd.ExecuteReader();
@@ -88,11 +89,32 @@ namespace HospitalSystemApp
                         WHERE S.PatientID = @id
                         ORDER BY S.ServiceDate DESC";
 
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                da.SelectCommand.Parameters.AddWithValue("@id", _user.PersonID);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                SqlParameter paramId = new SqlParameter("@id", _user.PersonID);
+                cmd.Parameters.Add(paramId);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
 
                 dtServices.Clear();
-                da.Fill(dtServices);
+                dtServices.Columns.Clear();
+                dtServices.Columns.Add("Date", typeof(DateTime));
+                dtServices.Columns.Add("Type", typeof(string));
+                dtServices.Columns.Add("Status", typeof(string));
+                dtServices.Columns.Add("Notes", typeof(string));
+                dtServices.Columns.Add("Doctor", typeof(string));
+
+                while (reader.Read())
+                {
+                    DataRow row = dtServices.NewRow();
+                    row["Date"] = reader["Date"];
+                    row["Type"] = reader.IsDBNull(reader.GetOrdinal("Type")) ? (object)DBNull.Value : reader["Type"];
+                    row["Status"] = reader["Status"];
+                    row["Notes"] = reader.IsDBNull(reader.GetOrdinal("Notes")) ? (object)DBNull.Value : reader["Notes"];
+                    row["Doctor"] = reader.IsDBNull(reader.GetOrdinal("Doctor")) ? (object)DBNull.Value : reader["Doctor"];
+                    dtServices.Rows.Add(row);
+                }
+
+                reader.Close();
 
                 if (dtServices.Rows.Count == 0)
                 {

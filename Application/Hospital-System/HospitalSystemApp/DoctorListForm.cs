@@ -26,9 +26,31 @@ public partial class DoctorsListForm : Form
                            FROM Doctor D
                            JOIN Person P ON D.DoctorID = P.PersonID
                            LEFT JOIN Department Dept ON D.DepartmentID = Dept.DepartmentID";
-            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
             DataTable dt = new DataTable();
-            da.Fill(dt);
+            dt.Columns.Add("DoctorID", typeof(int));
+            dt.Columns.Add("Name", typeof(string));
+            dt.Columns.Add("Email", typeof(string));
+            dt.Columns.Add("Shift", typeof(string));
+            dt.Columns.Add("Department", typeof(string));
+            dt.Columns.Add("Location", typeof(string));
+
+            while (reader.Read())
+            {
+                DataRow row = dt.NewRow();
+                row["DoctorID"] = reader["DoctorID"];
+                row["Name"] = reader["Name"];
+                row["Email"] = reader["Email"];
+                row["Shift"] = reader.IsDBNull(reader.GetOrdinal("Shift")) ? (object)DBNull.Value : reader["Shift"];
+                row["Department"] = reader.IsDBNull(reader.GetOrdinal("Department")) ? (object)DBNull.Value : reader["Department"];
+                row["Location"] = reader.IsDBNull(reader.GetOrdinal("Location")) ? (object)DBNull.Value : reader["Location"];
+                dt.Rows.Add(row);
+            }
+
+            reader.Close();
             dgvDoctors.DataSource = dt;
         }
     }

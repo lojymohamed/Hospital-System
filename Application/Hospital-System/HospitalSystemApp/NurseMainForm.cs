@@ -63,7 +63,8 @@ public partial class NurseMainForm : Form
             dt.Columns.Add("PatientName", typeof(string));
 
             SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@nid", _nurseId);
+            SqlParameter paramNurseId = new SqlParameter("@nid", _nurseId);
+            cmd.Parameters.Add(paramNurseId);
             conn.Open();
             SqlDataReader r = cmd.ExecuteReader();
             while (r.Read())

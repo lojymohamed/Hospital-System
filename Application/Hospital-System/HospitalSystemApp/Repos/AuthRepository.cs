@@ -24,8 +24,10 @@ public class AuthRepository
                 WHERE P.Email = @email AND P.BirthDate = @dob";
 
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@dob", dob); // User enters: YYYY-MM-DD
+            SqlParameter paramEmail = new SqlParameter("@email", email);
+            cmd.Parameters.Add(paramEmail);
+            SqlParameter paramDob = new SqlParameter("@dob", dob); // User enters: YYYY-MM-DD
+            cmd.Parameters.Add(paramDob);
 
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();

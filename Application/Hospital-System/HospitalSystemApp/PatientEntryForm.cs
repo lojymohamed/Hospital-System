@@ -45,14 +45,27 @@ namespace HospitalSystemApp
         {
             using (SqlConnection conn = DB.GetConnection())
             {
-                // Join Doctor and Person tables from your SQL schema
-                string sql = @"SELECT P.PersonID, P.Fname + ' ' + P.Lname AS Name 
-                           FROM Doctor D 
+                string sql = @"SELECT P.PersonID, P.Fname + ' ' + P.Lname AS Name
+                           FROM Doctor D
                            JOIN Person P ON D.DoctorID = P.PersonID";
 
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
                 DataTable dt = new DataTable();
-                da.Fill(dt);
+                dt.Columns.Add("PersonID", typeof(int));
+                dt.Columns.Add("Name", typeof(string));
+
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["PersonID"] = reader["PersonID"];
+                    row["Name"] = reader["Name"];
+                    dt.Rows.Add(row);
+                }
+
+                reader.Close();
 
                 // Add a placeholder row at the top
                 DataRow placeholder = dt.NewRow();
@@ -63,7 +76,7 @@ namespace HospitalSystemApp
                 cmbDoctor.DataSource = dt;
                 cmbDoctor.DisplayMember = "Name";
                 cmbDoctor.ValueMember = "PersonID";
-                cmbDoctor.SelectedIndex = 0; // Show placeholder first
+                cmbDoctor.SelectedIndex = 0;
             }
         }
 
@@ -128,9 +141,12 @@ namespace HospitalSystemApp
                     // STEP 1: Insert into Services
                     string sqlService = "INSERT INTO Services (ServiceDate, Notes, PatientID) VALUES (@date, @notes, @pid); SELECT SCOPE_IDENTITY();";
                     SqlCommand cmd1 = new SqlCommand(sqlService, conn, trans);
-                    cmd1.Parameters.AddWithValue("@date", dtpDate.Value);
-                    cmd1.Parameters.AddWithValue("@notes", txtNote.Text);
-                    cmd1.Parameters.AddWithValue("@pid", _patientID);
+                    SqlParameter paramDate = new SqlParameter("@date", dtpDate.Value);
+                    cmd1.Parameters.Add(paramDate);
+                    SqlParameter paramNotes = new SqlParameter("@notes", txtNote.Text);
+                    cmd1.Parameters.Add(paramNotes);
+                    SqlParameter paramPid = new SqlParameter("@pid", _patientID);
+                    cmd1.Parameters.Add(paramPid);
                     int newServiceID = Convert.ToInt32(cmd1.ExecuteScalar());
 
 

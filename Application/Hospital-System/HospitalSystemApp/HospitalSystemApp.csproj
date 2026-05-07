@@ -111,6 +111,9 @@
     <EmbeddedResource Include="DoctorMainForm.resx">
       <DependentUpon>DoctorMainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ManagePatientsForm.resx">
+      <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NurseMainForm.resx">
       <DependentUpon>NurseMainForm.cs</DependentUpon>
     </EmbeddedResource>

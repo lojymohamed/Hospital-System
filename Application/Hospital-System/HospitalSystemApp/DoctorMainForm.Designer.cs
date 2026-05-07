@@ -98,7 +98,7 @@
             this.btnManagePatients.Location = new System.Drawing.Point(349, 524);
             this.btnManagePatients.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnManagePatients.Name = "btnManagePatients";
-            this.btnManagePatients.Size = new System.Drawing.Size(150, 42);
+            this.btnManagePatients.Size = new System.Drawing.Size(169, 42);
             this.btnManagePatients.TabIndex = 7;
             this.btnManagePatients.Text = "Manage Patients";
             this.btnManagePatients.UseVisualStyleBackColor = false;
