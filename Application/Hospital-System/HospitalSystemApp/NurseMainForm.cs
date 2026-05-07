@@ -163,6 +163,7 @@ public partial class NurseMainForm : Form
             this.Controls.Add(this.dgvTasks);
             this.Controls.Add(this.lblTitle);
             this.Name = "NurseMainForm";
+            this.Text = "Nurse Main Form";
             this.Load += new System.EventHandler(this.NurseMainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).EndInit();
             this.ResumeLayout(false);
