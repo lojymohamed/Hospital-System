@@ -1,32 +1,6 @@
 USE HospitalSystem;
 GO
 
--- CLEANUP: Kill all existing constraints and tables
-
-DECLARE @sql NVARCHAR(MAX) = N'';
-SELECT @sql += 'ALTER TABLE ' + QUOTENAME(OBJECT_SCHEMA_NAME(parent_object_id))
-    + '.' + QUOTENAME(OBJECT_NAME(parent_object_id)) 
-    + ' DROP CONSTRAINT ' + QUOTENAME(name) + ';'
-FROM sys.foreign_keys;
-
-EXEC sp_executesql @sql;
-
-DROP TABLE IF EXISTS NurseHisServices;
-DROP TABLE IF EXISTS NurseServices;
-DROP TABLE IF EXISTS DoctorHisServices;
-DROP TABLE IF EXISTS DoctorServices;
-DROP TABLE IF EXISTS Services;
-DROP TABLE IF EXISTS Insurance;
-DROP TABLE IF EXISTS PersonPhone;
-DROP TABLE IF EXISTS Patient;
-DROP TABLE IF EXISTS Nurse;
-DROP TABLE IF EXISTS Doctor;
-DROP TABLE IF EXISTS Department;
-DROP TABLE IF EXISTS Person;
-GO
-
-
---  CREATE TABLES
 
 CREATE TABLE Person (
     PersonID INT PRIMARY KEY IDENTITY(1,1), 
